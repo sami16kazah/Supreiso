@@ -43,16 +43,16 @@ export default function Navbar() {
           </div>
 
           {/* Actions */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4  ">
             <FormControl size="small" variant="standard" sx={{ minWidth: 50 }}>
               <Select
                 value={currentLocale}
                 onChange={(e) => changeLanguage(e.target.value)}
                 disableUnderline
-                className="text-sm font-semibold text-gray-700 dark:text-gray-300"
+                className="text-sm font-semibold text-gray-300 dark:text-gray-300 "
               >
-                <MenuItem value="en">EN</MenuItem>
-                <MenuItem value="de">DE</MenuItem>
+                <MenuItem  value="en"> <p className="text-gray-900 dark:text-gray-300">EN</p></MenuItem>
+                <MenuItem  value="de"> <p className="text-gray-900 dark:text-gray-300">DE</p></MenuItem>
               </Select>
             </FormControl>
 
