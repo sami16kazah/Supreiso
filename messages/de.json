@@ -1,0 +1,16 @@
+{
+  "Navbar": {
+    "shopAll": "Alle Einkaufen",
+    "buildBox": "Geschenkbox Bauen",
+    "signIn": "Anmelden",
+    "signOut": "Abmelden",
+    "admin": "Admin"
+  },
+  "Home": {
+    "title": "Entdecke die Magie.",
+    "subtitle": "Gestalten Sie die perfekte, personalisierte Geschenkbox für Ihre Lieben mit Surpriso. Handverlesene Eleganz direkt vor die Haustür.",
+    "startBuilding": "Box Bauen",
+    "browseCatalog": "Katalog Anzeigen",
+    "howItWorks": "Wie es funktioniert"
+  }
+}

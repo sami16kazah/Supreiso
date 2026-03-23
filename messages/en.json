@@ -1,0 +1,16 @@
+{
+  "Navbar": {
+    "shopAll": "Shop All",
+    "buildBox": "Build a Gift Box",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "admin": "Admin"
+  },
+  "Home": {
+    "title": "Unwrap the Magic.",
+    "subtitle": "Create the perfect, personalized gift box for your loved ones with Surpriso. Hand-picked elegance delivered to their door.",
+    "startBuilding": "Start Building",
+    "browseCatalog": "Browse Catalog",
+    "howItWorks": "How It Works"
+  }
+}
