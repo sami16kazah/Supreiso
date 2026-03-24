@@ -70,7 +70,7 @@ export default async function ProductsCatalog() {
                     <button className="w-full group/btn relative overflow-hidden rounded-2xl bg-gray-900 dark:bg-white px-6 py-4 text-white dark:text-gray-900 font-bold text-sm transition-all duration-300 hover:bg-pink-600 dark:hover:bg-pink-500 dark:hover:text-white shadow-xl hover:shadow-pink-500/20">
                       <span className="relative z-10 flex items-center justify-center gap-2">
                         Build into a Box
-                        <svg className="w-4 h-4 transform transition-transform group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="arrow-right" /></svg>
+                        <svg className="w-4 h-4 transform transition-transform group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                       </span>
                     </button>
                   </Link>

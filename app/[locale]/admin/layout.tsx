@@ -14,6 +14,8 @@ export default async function AdminLayout({ children }: { children: ReactNode })
 
   const navItems = [
     { label: "Dashboard", href: "/admin", icon: <MdDashboard size={20} /> },
+    { label: "Gift Boxes", href: "/admin/gift-boxes", icon: <MdInventory size={20} /> },
+    { label: "Brief Cards", href: "/admin/brief-cards", icon: <MdLoyalty size={20} /> },
     { label: "Products", href: "/admin/products", icon: <MdInventory size={20} /> },
     { label: "Coupons", href: "/admin/coupons", icon: <MdLoyalty size={20} /> },
     { label: "Orders", href: "/admin/orders", icon: <MdReceipt size={20} /> }

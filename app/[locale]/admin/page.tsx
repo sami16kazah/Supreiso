@@ -2,6 +2,7 @@ import dbConnect from "@/lib/mongoose";
 import Order from "@/models/Order";
 import Product from "@/models/Product";
 import Coupon from "@/models/Coupon";
+import User from "@/models/User";
 import { MdAttachMoney, MdLocalMall, MdAssignment, MdLocalOffer } from "react-icons/md";
 import Link from 'next/link';
 

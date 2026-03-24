@@ -3,6 +3,9 @@ import Stripe from "stripe";
 import dbConnect from "@/lib/mongoose";
 import Order from "@/models/Order";
 import Coupon from "@/models/Coupon";
+import GiftBox from "@/models/GiftBox";
+import BriefCard from "@/models/BriefCard";
+import Product from "@/models/Product";
 import Mailjet from "node-mailjet";
 
 // Initialize Stripe ensuring the key is present
@@ -69,6 +72,7 @@ export async function POST(req: Request) {
       name: i.product.name,
       priceAtPurchase: i.product.price,
       quantity: i.quantity,
+      giftBoxData: i.giftBoxData || undefined,
     }));
 
     const totalAmount = finalTotalAmount;

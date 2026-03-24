@@ -122,19 +122,51 @@ export default function OrderDetailsPage() {
             <h2 className="text-xl font-black text-gray-900 dark:text-white tracking-tight mb-8">Asset Manifest</h2>
             <div className="space-y-4">
               {order.items?.map((item: any, idx: number) => (
-                <div key={idx} className="flex justify-between items-center p-6 bg-gray-50 dark:bg-white/5 rounded-[2rem] border border-white dark:border-white/5 hover:border-pink-500/20 transition-all">
-                  <div className="flex items-center gap-6">
-                    <div className="w-12 h-12 rounded-xl bg-white dark:bg-gray-800 flex items-center justify-center text-[10px] font-black text-pink-500 shadow-sm border border-gray-100 dark:border-white/5">
-                      {item.quantity}x
+                <div key={idx} className="space-y-4 pb-4">
+                  <div className="flex justify-between items-center p-6 bg-gray-50 dark:bg-white/5 rounded-[2rem] border border-white dark:border-white/5 hover:border-pink-500/20 transition-all">
+                    <div className="flex items-center gap-6">
+                      <div className="w-12 h-12 rounded-xl bg-white dark:bg-gray-800 flex items-center justify-center text-[10px] font-black text-pink-500 shadow-sm border border-gray-100 dark:border-white/5">
+                        {item.quantity}x
+                      </div>
+                      <div>
+                        <div className="font-black text-gray-900 dark:text-white uppercase tracking-tight">{item.name}</div>
+                        <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-1">Unit Valuation: ${item.priceAtPurchase.toFixed(2)}</div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="font-black text-gray-900 dark:text-white uppercase tracking-tight">{item.name}</div>
-                      <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-1">Unit Valuation: ${item.priceAtPurchase.toFixed(2)}</div>
+                    <div className="text-lg font-black text-gray-900 dark:text-white tracking-tighter">
+                      ${(item.priceAtPurchase * item.quantity).toFixed(2)}
                     </div>
                   </div>
-                  <div className="text-lg font-black text-gray-900 dark:text-white tracking-tighter">
-                    ${(item.priceAtPurchase * item.quantity).toFixed(2)}
-                  </div>
+
+                  {/* Gift Box Specs */}
+                  {item.giftBoxData && (
+                    <div className="ml-12 p-8 bg-pink-500/5 rounded-[2rem] border border-pink-500/10 grid grid-cols-1 md:grid-cols-2 gap-8 relative overflow-hidden">
+                       <div className="absolute top-0 right-0 w-32 h-32 bg-pink-500/5 rounded-full blur-3xl"></div>
+                       <div className="space-y-4">
+                          <div className="text-[10px] font-black text-pink-500 uppercase tracking-widest">Vessel Arrangement</div>
+                          <div className="space-y-2">
+                             {item.giftBoxData.contents.map((c: any, ci: number) => (
+                               <div key={ci} className="flex items-center gap-3 text-xs font-bold text-gray-500 dark:text-gray-400">
+                                  <span className="text-[9px] text-pink-500/40 uppercase w-12">{c.sectionName}:</span>
+                                  <span>{c.product?.name || "Premium Item"}</span>
+                               </div>
+                             ))}
+                          </div>
+                       </div>
+                       <div className="space-y-4">
+                         <div className="text-[10px] font-black text-pink-500 uppercase tracking-widest">Brief Metadata</div>
+                         <div className="p-4 bg-white/40 dark:bg-black/20 rounded-2xl border border-white/20">
+                            <div className="flex gap-4 mb-3">
+                               <div className="text-[10px] font-black uppercase text-gray-400">From: <span className="text-gray-900 dark:text-white">{item.giftBoxData.from}</span></div>
+                               <div className="text-[10px] font-black uppercase text-gray-400">To: <span className="text-gray-900 dark:text-white">{item.giftBoxData.to}</span></div>
+                            </div>
+                            <div className="text-[11px] font-medium italic text-gray-600 dark:text-gray-300 leading-relaxed leading-relaxed">
+                               "{item.giftBoxData.customMessage}"
+                            </div>
+                         </div>
+                       </div>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

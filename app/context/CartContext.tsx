@@ -5,12 +5,13 @@ import { createContext, useContext, useState, useEffect } from "react";
 type CartItem = {
   product: any;
   quantity: number;
+  giftBoxData?: any;
 };
 
 type CartContextType = {
   cart: CartItem[];
-  addToCart: (product: any, quantity?: number) => void;
-  removeFromCart: (productId: string) => void;
+  addToCart: (product: any, quantity?: number, giftBoxData?: any) => void;
+  removeFromCart: (productId: string, giftBoxData?: any) => void;
   clearCart: () => void;
   cartTotal: number;
   baseTotal: number;
@@ -49,20 +50,30 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   }, [cart, appliedCoupon, isMounted]);
 
-  const addToCart = (product: any, quantity = 1) => {
+  const addToCart = (product: any, quantity = 1, giftBoxData?: any) => {
     setCart((prev) => {
-      const existing = prev.find((item) => item.product._id === product._id);
+      // For gift boxes, we usually want them as unique items even if the base product is same
+      if (giftBoxData) {
+        return [...prev, { product, quantity, giftBoxData }];
+      }
+      
+      const existing = prev.find((item) => item.product._id === product._id && !item.giftBoxData);
       if (existing) {
         return prev.map((item) =>
-          item.product._id === product._id ? { ...item, quantity: item.quantity + quantity } : item
+          (item.product._id === product._id && !item.giftBoxData) ? { ...item, quantity: item.quantity + quantity } : item
         );
       }
       return [...prev, { product, quantity }];
     });
   };
 
-  const removeFromCart = (productId: string) => {
-    setCart((prev) => prev.filter((item) => item.product._id !== productId));
+  const removeFromCart = (productId: string, giftBoxData?: any) => {
+    setCart((prev) => prev.filter((item) => {
+      if (giftBoxData) {
+        return item.giftBoxData !== giftBoxData; // Simple reference check or deep compare
+      }
+      return item.product._id !== productId;
+    }));
   };
 
   const clearCart = () => {
