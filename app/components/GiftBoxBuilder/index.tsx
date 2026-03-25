@@ -27,9 +27,9 @@ export default function GiftBoxBuilder() {
   const router = useRouter();
 
   useEffect(() => {
-    fetch("/api/admin/gift-boxes").then(r => r.json()).then(setGiftBoxes);
-    fetch("/api/admin/products?type=item").then(r => r.json()).then(setProducts);
-    fetch("/api/admin/brief-cards").then(r => r.json()).then(setBriefCards);
+    fetch("/api/gift-boxes").then(r => r.json()).then(setGiftBoxes);
+    fetch("/api/products?type=item").then(r => r.json()).then(setProducts);
+    fetch("/api/brief-cards").then(r => r.json()).then(setBriefCards);
   }, []);
 
   const handleSectionClick = (sectionName: string) => {
@@ -63,6 +63,9 @@ export default function GiftBoxBuilder() {
   const handleFinish = () => {
     if (!selectedBox || !selectedCard) return;
 
+    const finalPrice = selectedBox.basePrice + boxContents.reduce((sum, c) => sum + c.product.price, 0);
+    const boxWithPrice = { ...selectedBox, price: finalPrice, type: 'gift-box' };
+
     const giftBoxData = {
       giftBoxId: selectedBox._id,
       from: briefForm.from,
@@ -71,11 +74,11 @@ export default function GiftBoxBuilder() {
       customMessage: briefForm.message,
       contents: boxContents.map(c => ({
         sectionName: c.sectionName,
-        product: c.product._id
+        product: c.product // Include full product instead of just ID for easier cart rendering
       }))
     };
 
-    addToCart(selectedBox, 1, giftBoxData);
+    addToCart(boxWithPrice, 1, giftBoxData);
     router.push("/cart");
   };
 

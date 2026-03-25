@@ -74,16 +74,35 @@ export default function CartPage() {
                     )}
                   </div>
                   <div>
-                    <div className="text-[10px] font-black uppercase tracking-[0.2em] text-pink-500 mb-1">{item.product.type}</div>
+                    <div className="text-[10px] font-black uppercase tracking-[0.2em] text-pink-500 mb-1">
+                      {item.product.type === 'gift-box' ? 'Custom Masterpiece' : item.product.type}
+                    </div>
                     <h3 className="font-extrabold text-xl text-gray-900 dark:text-white mb-2 leading-tight">{item.product.name}</h3>
-                    <div className="flex items-center gap-4 text-sm font-bold">
-                       <span className="text-gray-400">${item.product.price.toFixed(2)} unit</span>
+                    
+                    {item.giftBoxData && (
+                      <div className="mt-2 space-y-1">
+                        <div className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Contents:</div>
+                        <div className="flex flex-wrap gap-2">
+                          {item.giftBoxData.contents.map((c: any, i: number) => (
+                            <div key={i} className="text-[8px] font-black bg-gray-100 dark:bg-white/5 px-2 py-0.5 rounded uppercase text-gray-500">
+                              {c.sectionName}: {c.product.name}
+                            </div>
+                          ))}
+                        </div>
+                        <div className="text-[9px] italic text-pink-500/70 mt-1">To: {item.giftBoxData.to}</div>
+                      </div>
+                    )}
+
+                    <div className="flex items-center gap-4 text-sm font-bold mt-3">
+                       <span className="text-gray-400">${(item.product.price || item.product.basePrice || 0).toFixed(2)} unit</span>
                        <span className="px-3 py-1 bg-gray-50 dark:bg-white/5 rounded-lg text-gray-600 dark:text-gray-300">Qty: {item.quantity}</span>
                     </div>
                   </div>
                 </div>
                 <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center w-full sm:w-auto mt-6 sm:mt-0 h-full gap-4">
-                  <span className="font-black text-2xl text-gray-900 dark:text-white tracking-tighter">${(item.product.price * item.quantity).toFixed(2)}</span>
+                  <span className="font-black text-2xl text-gray-900 dark:text-white tracking-tighter">
+                    ${((item.product.price || item.product.basePrice || 0) * item.quantity).toFixed(2)}
+                  </span>
                   <button 
                     onClick={() => removeFromCart(item.product._id)} 
                     className="p-3 rounded-full text-gray-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all"

@@ -84,7 +84,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const applyCoupon = (coupon: any) => setAppliedCoupon(coupon);
   const removeCoupon = () => setAppliedCoupon(null);
 
-  const baseTotal = cart.reduce((total, item) => total + item.product.price * item.quantity, 0);
+  const baseTotal = cart.reduce((total, item) => total + (item.product.price || item.product.basePrice || 0) * item.quantity, 0);
   let cartTotal = baseTotal;
 
   if (appliedCoupon) {
